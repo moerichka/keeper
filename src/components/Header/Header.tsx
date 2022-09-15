@@ -14,20 +14,19 @@ const Header: React.FC<IProps> = ({ onBurgerClick }) => {
   return (
     <AppBar
       position="fixed"
-      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: "white" }}
     >
       <Toolbar>
         <IconButton
           onClick={onBurgerClick}
           size="large"
           edge="start"
-          color="inherit"
           aria-label="menu"
-          sx={{ mr: 2 }}
+          sx={{ mr: 2, color: "black" }}
         >
           <MenuIcon />
         </IconButton>
-        <h6>Keeper</h6>
+        <h6 className="h6-title">Keeper</h6>
       </Toolbar>
     </AppBar>
   );

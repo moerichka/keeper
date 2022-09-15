@@ -3,7 +3,7 @@ import s from "./workSpace.module.scss";
 
 import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-import TextField from "@mui/material/TextField";
+import NoteCreator from "../NoteCreator";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
@@ -32,10 +32,7 @@ const WorkSpace: React.FC<IProps> = ({ open }) => {
     <Main open={open}>
       <Toolbar />
       <div className={s.content}>
-        <TextField
-          id="outlined-basic"
-          label="Ваша заметка"
-        />
+        <NoteCreator />
       </div>
     </Main>
   );
