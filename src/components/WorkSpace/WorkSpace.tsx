@@ -1,9 +1,44 @@
-import React from 'react'
+import React from "react";
+import s from "./workSpace.module.scss";
 
-const WorkSpace: React.FC = () => {
-  return (
-    <div>WorkSpace</div>
-  )
+import { styled } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import TextField from "@mui/material/TextField";
+
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
+  open?: boolean;
+}>(({ theme, open }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  transition: theme.transitions.create("margin", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  }),
+}));
+
+interface IProps {
+  open: boolean;
 }
 
-export default WorkSpace
+const WorkSpace: React.FC<IProps> = ({ open }) => {
+  return (
+    <Main open={open}>
+      <Toolbar />
+      <div className={s.content}>
+        <TextField
+          id="outlined-basic"
+          label="Ваша заметка"
+        />
+      </div>
+    </Main>
+  );
+};
+
+export default WorkSpace;

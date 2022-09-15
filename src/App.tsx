@@ -1,12 +1,33 @@
-import React from 'react'
-import s from "./app.module.scss"
+import React, { useState } from "react";
+import s from "./app.module.scss";
 
-const App : React.FC = () => {
+import Box from "@mui/material/Box";
+
+import Header from "./components/Header";
+import SideBar from "./components/SideBar";
+import WorkSpace from "./components/WorkSpace";
+
+const App: React.FC = () => {
+  const [open, setOpen] = useState(false);
+  const [currnetTab, setCurrentTab] = useState(0)
+
+  const onTabClick = (index: number) => {
+    setCurrentTab(index)
+  }
+
+  const onBurgerClick = () => {
+    setOpen((prev) => !prev);
+  };
+
   return (
-    <div className={s.app}>
-        
-    </div>
-  )
-}
+    <Box sx={{ display: 'flex' }}>
+      <Header
+        onBurgerClick={onBurgerClick}
+      />
+      <SideBar open={open} onTabClick={onTabClick}/>
+      <WorkSpace open={open} />
+    </Box>
+  );
+};
 
-export default App
+export default App;
