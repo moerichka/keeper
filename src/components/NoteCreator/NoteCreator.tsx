@@ -41,10 +41,13 @@ const NoteCreator: React.FC = () => {
       return;
     }
 
+    const now = new Date()
+
     const newNote = {
+      id: now.getTime().toString(),
       title: noteContent.title,
       text: noteContent.text,
-      dateCreation: new Date()
+      dateCreation: now
     }
 
     reset()

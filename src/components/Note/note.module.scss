@@ -21,6 +21,11 @@
         pointer-events: all;
     }
   }
+
+  &[data-is-completed="true"]{
+    background-color: $green;
+    color: $white;
+  }
 }
 
 .completeButton {

@@ -6,15 +6,22 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 interface IProps {
   note: INote;
+  onCompleteClick: (note: INote) => void;
 }
 
-const Note: React.FC<IProps> = ({ note }) => {
+const Note: React.FC<IProps> = ({ note, onCompleteClick }) => {
+  const completeClickHandler = () => {
+    onCompleteClick(note);
+  };
+
   return (
-    <div className={s.card}>
+    <div className={s.card} data-is-completed={note.isCompleted}>
       <h5 className={s.title}>{note.title}</h5>
       <p className={s.text}>{note.text}</p>
-      <p className={s.date}>{new Date(note.dateCreation).toLocaleDateString()}</p>
-      <div className={s.completeButton}>
+      <p className={s.date}>
+        {new Date(note.dateCreation).toLocaleDateString()}
+      </p>
+      <div className={s.completeButton} onClick={completeClickHandler}>
         <TaskAltIcon className={s.completeIcon} />
       </div>
     </div>

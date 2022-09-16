@@ -1,5 +1,6 @@
 import React, { useContext, useMemo } from "react";
 import { NoteContext } from "../../context/NoteContext";
+import { INote } from "../../types/note";
 import Note from "../Note";
 import s from "./listNotes.module.scss";
 
@@ -16,11 +17,19 @@ const ListNotes: React.FC = () => {
     [state]
   );
 
+  const onCompleteClick = (note: INote) => {
+    const newNote = { ...note, isCompleted: !note.isCompleted };
+    dispatch({
+      type: "CHANGE_NOTE",
+      payload: { newNote, id: note.id },
+    });
+  };
+
   return (
     <div className={s.grid}>
       {notes?.map((note) => (
-        <React.Fragment key={note.dateCreation.toString()}>
-          <Note note={note} />
+        <React.Fragment key={note.id}>
+          <Note note={note} onCompleteClick={onCompleteClick} />
         </React.Fragment>
       ))}
     </div>
