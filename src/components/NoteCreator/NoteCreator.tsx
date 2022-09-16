@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
+import {NoteContext} from "../../context/NoteContext" 
 import s from "./noteCreator.module.scss";
 
 import TextField from "@mui/material/TextField";
@@ -6,6 +7,7 @@ import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const NoteCreator: React.FC = () => {
+  const {state, dispatch} = useContext(NoteContext);
   const inputRef = useRef<any>()
   const [noteContent, setNoteContent] = useState({
     title: "",
@@ -34,8 +36,15 @@ const NoteCreator: React.FC = () => {
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
+    const newNote = {
+      title: noteContent.title,
+      text: noteContent.text,
+      dateCreation: new Date()
+    }
+
     reset()
     setIsFocused(false)
+    dispatch({type: "CREATE_NOTE", payload: {newNote}})
   };
 
   return (
