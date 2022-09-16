@@ -12,14 +12,14 @@ interface IProps {
   note: INote;
   onCompleteClick: (note: INote) => void;
   options: IMenuOption[];
-  varient?: string;
+  variant?: string;
 }
 
 const Note: React.FC<IProps> = ({
   note,
   onCompleteClick,
   options,
-  varient = "",
+  variant = "",
 }) => {
   const completeClickHandler = () => {
     onCompleteClick(note);
@@ -29,7 +29,7 @@ const Note: React.FC<IProps> = ({
     <div
       className={s.card}
       data-is-completed={note.isCompleted}
-      data-type={varient}
+      data-type={variant}
     >
       <h5 className={s.title}>{note.title}</h5>
       <p className={s.text}>{note.text}</p>

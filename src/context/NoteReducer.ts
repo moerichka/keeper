@@ -18,16 +18,26 @@ const NoteReducer = (state: INote[], action: IAction): INote[] => {
       return newNotes;
 
     case "CHANGE_NOTE":
-      let filteredNotes = notesData.filter(
-        (note: INote) =>
-          note.id !== action.payload.id
+      const notCurrentNotes = notesData.filter(
+        (note: INote) => note.id !== action.payload.id
       );
 
       localStorage.setItem(
         LOCAL_STORAGE_ITEM_NAME,
-        JSON.stringify([...filteredNotes, action.payload.newNote])
+        JSON.stringify([...notCurrentNotes, action.payload.newNote])
       );
-      return [...filteredNotes, action.payload.newNote];
+      return [...notCurrentNotes, action.payload.newNote];
+
+    case "FILTER_NOTES":
+      const filteredNotes = notesData.filter((note: INote) => {
+        const title = note.title.toLowerCase();
+        const text = note.text.toLowerCase();
+        const searchText = action.payload.searchText?.toLowerCase() || "";
+        if (searchText === "") return true;
+        return title.startsWith(searchText) || text.startsWith(searchText);
+      });
+
+      return filteredNotes;
 
     default:
       return state;
