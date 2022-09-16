@@ -8,14 +8,20 @@ const ListNotes: React.FC = () => {
 
   const notes = useMemo(
     () =>
-      state.sort((a, b) => a.dateCreation.getTime() - b.dateCreation.getTime()),
+      state.sort(
+        (a, b) =>
+          new Date(a.dateCreation).getTime() -
+          new Date(b.dateCreation).getTime()
+      ),
     [state]
   );
 
   return (
     <div className={s.grid}>
       {notes?.map((note) => (
-        <Note note={note} />
+        <React.Fragment key={note.dateCreation.toString()}>
+          <Note note={note} />
+        </React.Fragment>
       ))}
     </div>
   );

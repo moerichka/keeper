@@ -13,7 +13,7 @@ const Note: React.FC<IProps> = ({ note }) => {
     <div className={s.card}>
       <h5 className={s.title}>{note.title}</h5>
       <p className={s.text}>{note.text}</p>
-      <p className={s.date}>{note.dateCreation.toLocaleDateString()}</p>
+      <p className={s.date}>{new Date(note.dateCreation).toLocaleDateString()}</p>
       <div className={s.completeButton}>
         <TaskAltIcon className={s.completeIcon} />
       </div>

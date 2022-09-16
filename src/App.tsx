@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import s from "./app.module.scss";
-import {NoteContextProvider} from "./context/NoteContext";
+import { NoteContextProvider } from "./context/NoteContext";
 
 import Box from "@mui/material/Box";
 

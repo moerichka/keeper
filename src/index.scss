@@ -14,6 +14,7 @@ $transition03: 0.3s;
 a:focus,a:active{outline: none;}
 nav,footer,header,aside{display: block;}
 html, body{
+    overflow-x: hidden;
 height: 100%;
 background-color: $bg;
 font-family: 'Roboto', sans-serif;

@@ -36,6 +36,11 @@ const NoteCreator: React.FC = () => {
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
+
+    if(noteContent.title === "" && noteContent.text === "" ){
+      return;
+    }
+
     const newNote = {
       title: noteContent.title,
       text: noteContent.text,
