@@ -15,7 +15,7 @@ const Header: React.FC<IProps> = ({ onBurgerClick }) => {
     <AppBar
       position="fixed"
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: "white" }}
-    >
+    > 
       <Toolbar>
         <IconButton
           onClick={onBurgerClick}

@@ -3,6 +3,7 @@ export interface INote {
   title: string;
   text: string;
   dateCreation: Date;
+  dateExpiration?: Date;
   isCompleted?: boolean;
 }
 

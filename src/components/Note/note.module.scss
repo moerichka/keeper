@@ -16,13 +16,17 @@
   transition: $transition03;
   &:hover {
     transform: scale(1.05);
-    .completeButton{
-        opacity: 1;
-        pointer-events: all;
+    .completeButton {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .menuMore {
+      opacity: 1;
+      pointer-events: all;
     }
   }
 
-  &[data-is-completed="true"]{
+  &[data-is-completed="true"] {
     background-color: $green;
     color: $white;
   }
@@ -37,14 +41,33 @@
   transform: translate(50%, 50%);
   padding: 5px;
   transition: $transition03;
+  color: $black;
   .completeIcon {
     transition: $transition03;
   }
   &:hover {
     .completeIcon {
+      transform: translateY(-2px);
       color: $green;
     }
   }
+  .deCompleteIcon {
+    transition: $transition03;
+  }
+  &:hover {
+    .deCompleteIcon {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.menuMore {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: $transition03;
 }
 
 .title {
