@@ -5,19 +5,17 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { IMenuOption, TArgumentFunc, TEmptyFunc } from "../../types/common";
+import { INote } from "../../types/note";
 
 const ITEM_HEIGHT = 48;
 
-interface IOption {
-  title: string;
-  handler: () => void;
-}
-
 interface IProps {
-  options: IOption[];
+  options: IMenuOption[];
+  note: INote;
 }
 
-const MenuMore: React.FC<IProps> = ({ options }) => {
+const MenuMore: React.FC<IProps> = ({ options, note }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null); // Хранение значения клика
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,10 +24,10 @@ const MenuMore: React.FC<IProps> = ({ options }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const menuClickHandler = (handler: () => void) => {
+  const menuClickHandler = (handler: TEmptyFunc | TArgumentFunc) => {
     setAnchorEl(null);
-    handler();
-  };
+    handler(note);
+  };  
 
   return (
     <div>

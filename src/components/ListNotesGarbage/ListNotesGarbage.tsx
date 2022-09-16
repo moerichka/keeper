@@ -2,15 +2,15 @@ import React, { useContext, useMemo } from "react";
 import { NoteContext } from "../../context/NoteContext";
 import { INote } from "../../types/note";
 import Note from "../Note";
-import s from "./listNotes.module.scss";
+import s from "./listNotesGarbage.module.scss";
 
-const ListNotes: React.FC = () => {
+const ListNotesGarbage: React.FC = () => {
   const { state, dispatch } = useContext(NoteContext); // Получаем закладки и редюсер для их изменения из контекста
 
   const notes = useMemo(
     () =>
       state
-        .filter((note) => !note.dateExpiration) // Удаляем закладки с датой удаления
+        .filter((note) => note.dateExpiration) // Удаляем закладки с датой удаления
         .sort(
           (a, b) =>
             new Date(a.dateCreation).getTime() -
@@ -28,19 +28,17 @@ const ListNotes: React.FC = () => {
     });
   };
 
-  const onDeleteClick = (note: INote) => {
-    // Функция вызываемая при удалении карточки, присваивая ей дату удаления через неделю
-    const now = Date.now();
-    const sevenDaysLater = new Date(now + 1000 * 60 * 60 * 24 * 7);
+  const onGetBackClick = (note: INote) => {
+    // Функция при клике на завершение или отмену завершения карточки
+    const newNote = { ...note, dateExpiration: undefined }; // Меняем у данной карточки поле isCompleted на противоположное
 
-    const newNote = { ...note, dateExpiration: sevenDaysLater };
     dispatch({
       type: "CHANGE_NOTE",
       payload: { newNote, id: note.id },
     });
   };
 
-  const options = [{ title: "Удалить", handler: onDeleteClick }]; // массив опций для меню
+  const options = [{ title: "Вернуть", handler: onGetBackClick }]; // массив опций для меню
 
   return (
     <div className={s.grid}>
@@ -57,4 +55,4 @@ const ListNotes: React.FC = () => {
   );
 };
 
-export default ListNotes;
+export default ListNotesGarbage;

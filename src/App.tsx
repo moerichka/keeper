@@ -9,6 +9,7 @@ import SideBar from "./components/SideBar";
 import WorkSpace from "./components/WorkSpace";
 import NoteCreator from "./components/NoteCreator";
 import ListNotes from "./components/ListNotes";
+import ListNotesGarbage from "./components/ListNotesGarbage";
 
 import { ITabName } from "./types/common";
 
@@ -37,7 +38,7 @@ const App: React.FC = () => {
         )}
         {currentTab === "Корзина" && (
           <WorkSpace open={open}>
-            <ListNotes />
+            <ListNotesGarbage />
           </WorkSpace>
         )}
       </Box>

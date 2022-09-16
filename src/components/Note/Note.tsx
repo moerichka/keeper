@@ -6,23 +6,18 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import RemoveDoneIcon from "@mui/icons-material/RemoveDone";
 
 import MenuMore from "../MenuMore";
+import { IMenuOption } from "../../types/common";
 
 interface IProps {
   note: INote;
   onCompleteClick: (note: INote) => void;
-  onDeleteClick: (note: INote) => void;
+  options: IMenuOption[];
 }
 
-const Note: React.FC<IProps> = ({ note, onCompleteClick, onDeleteClick }) => {
+const Note: React.FC<IProps> = ({ note, onCompleteClick, options }) => {
   const completeClickHandler = () => {
     onCompleteClick(note);
   };
-
-  const deleteClickHandler = () => {
-    onDeleteClick(note);
-  };
-
-  const options = [{ title: "Удалить", handler: deleteClickHandler }]; // массив опций для меню
 
   return (
     <div className={s.card} data-is-completed={note.isCompleted}>
@@ -39,7 +34,7 @@ const Note: React.FC<IProps> = ({ note, onCompleteClick, onDeleteClick }) => {
         )}
       </div>
       <div className={s.menuMore}>
-        <MenuMore options={options} />
+        <MenuMore options={options} note={note}/>
       </div>
     </div>
   );
