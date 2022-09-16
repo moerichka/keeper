@@ -11,6 +11,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { ITabName } from "../../types/common";
 
 const drawerWidth = 240;
 
@@ -54,16 +55,21 @@ const Drawer = styled(MuiDrawer, {
 
 interface IProps {
   open: boolean;
-  onTabClick: (index: number) => void;
+  currentTab: ITabName;
+  onTabClick: (title: ITabName) => void;
 }
 
-const navElements = [
+interface INavElement {
+  title: ITabName;
+  icon: any;
+}
+
+const navElements : INavElement[] = [
   { title: "Заметки", icon: <EmojiObjectsIcon /> },
   { title: "Корзина", icon: <DeleteIcon /> },
 ];
 
-const SideBar: React.FC<IProps> = ({ open, onTabClick }) => {
-
+const SideBar: React.FC<IProps> = ({ open, onTabClick, currentTab }) => {
   return (
     <Drawer variant="permanent" open={open}>
       <ToolBar />
@@ -75,12 +81,13 @@ const SideBar: React.FC<IProps> = ({ open, onTabClick }) => {
             sx={{ display: "block" }}
           >
             <ListItemButton
-              onClick={()=>onTabClick(index)}
+              onClick={() => onTabClick(navElem.title)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
+              selected={navElem.title === currentTab}
             >
               <ListItemIcon
                 sx={{

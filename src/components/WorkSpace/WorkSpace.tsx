@@ -26,15 +26,15 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
 
 interface IProps {
   open: boolean;
+  children: React.ReactNode | React.ReactNode[];
 }
 
-const WorkSpace: React.FC<IProps> = ({ open }) => {
+const WorkSpace: React.FC<IProps> = ({ open, children }) => {
   return (
     <Main open={open}>
       <Toolbar />
       <div className={s.content}>
-        <NoteCreator />
-        <ListNotes/>
+        {children}
       </div>
     </Main>
   );

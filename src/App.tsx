@@ -7,13 +7,17 @@ import Box from "@mui/material/Box";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import WorkSpace from "./components/WorkSpace";
+import NoteCreator from "./components/NoteCreator";
+import ListNotes from "./components/ListNotes";
+
+import { ITabName } from "./types/common";
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [currnetTab, setCurrentTab] = useState(0);
+  const [currentTab, setCurrentTab] = useState<ITabName>("Заметки");
 
-  const onTabClick = (index: number) => {
-    setCurrentTab(index);
+  const onTabClick = (title: ITabName) => {
+    setCurrentTab(title);
   };
 
   const onBurgerClick = () => {
@@ -24,8 +28,18 @@ const App: React.FC = () => {
     <NoteContextProvider>
       <Box sx={{ display: "flex" }}>
         <Header onBurgerClick={onBurgerClick} />
-        <SideBar open={open} onTabClick={onTabClick} />
-        <WorkSpace open={open} />
+        <SideBar open={open} currentTab={currentTab} onTabClick={onTabClick} />
+        {currentTab === "Заметки" && (
+          <WorkSpace open={open}>
+            <NoteCreator />
+            <ListNotes />
+          </WorkSpace>
+        )}
+        {currentTab === "Корзина" && (
+          <WorkSpace open={open}>
+            <ListNotes />
+          </WorkSpace>
+        )}
       </Box>
     </NoteContextProvider>
   );
