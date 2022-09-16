@@ -1,3 +1,8 @@
-.app{
-    
+@import "./index.scss";
+
+.notification > p{
+    color: $text-almost-transparent;
+    font-weight: 700;
+    font-size: 36px;
+    user-select: none;
 }

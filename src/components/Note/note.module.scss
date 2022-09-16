@@ -30,6 +30,16 @@
     background-color: $green;
     color: $white;
   }
+
+  &[data-type="deleted"] .title{
+    text-decoration: line-through;
+  }
+  &[data-type="deleted"] .text{
+    text-decoration: line-through;
+  }
+  &[data-type="deleted"] .date{
+    text-decoration: line-through;
+  }
 }
 
 .completeButton {
@@ -84,4 +94,13 @@
   margin-top: 10px;
   width: max-content;
   align-self: flex-end;
+}
+
+.dateExpirationWrapper{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
 }

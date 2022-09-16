@@ -38,6 +38,9 @@ const App: React.FC = () => {
         )}
         {currentTab === "Корзина" && (
           <WorkSpace open={open}>
+            <div className={s.notification}>
+              <p>Закладки помещенные в корзину, будут удалены через 7 дней</p>
+            </div>
             <ListNotesGarbage />
           </WorkSpace>
         )}

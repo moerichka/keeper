@@ -48,6 +48,7 @@ const ListNotesGarbage: React.FC = () => {
             note={note}
             onCompleteClick={onCompleteClick}
             options={options}
+            varient="deleted"
           />
         </React.Fragment>
       ))}

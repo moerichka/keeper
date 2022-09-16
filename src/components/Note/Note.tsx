@@ -12,20 +12,38 @@ interface IProps {
   note: INote;
   onCompleteClick: (note: INote) => void;
   options: IMenuOption[];
+  varient?: string;
 }
 
-const Note: React.FC<IProps> = ({ note, onCompleteClick, options }) => {
+const Note: React.FC<IProps> = ({
+  note,
+  onCompleteClick,
+  options,
+  varient = "",
+}) => {
   const completeClickHandler = () => {
     onCompleteClick(note);
   };
 
   return (
-    <div className={s.card} data-is-completed={note.isCompleted}>
+    <div
+      className={s.card}
+      data-is-completed={note.isCompleted}
+      data-type={varient}
+    >
       <h5 className={s.title}>{note.title}</h5>
       <p className={s.text}>{note.text}</p>
       <p className={s.date}>
         {new Date(note.dateCreation).toLocaleDateString()}
       </p>
+      {note.dateExpiration && (
+        <div className={s.dateExpirationWrapper}>
+          <p>Заметка будет удалена:</p>
+          <p className={s.dateExpiration}>
+            {new Date(note.dateExpiration).toLocaleDateString()}
+          </p>
+        </div>
+      )}
       <div className={s.completeButton} onClick={completeClickHandler}>
         {note.isCompleted ? (
           <RemoveDoneIcon className={s.deCompleteIcon} />
@@ -34,7 +52,7 @@ const Note: React.FC<IProps> = ({ note, onCompleteClick, options }) => {
         )}
       </div>
       <div className={s.menuMore}>
-        <MenuMore options={options} note={note}/>
+        <MenuMore options={options} note={note} />
       </div>
     </div>
   );
