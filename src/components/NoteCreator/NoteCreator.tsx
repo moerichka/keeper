@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext } from "react";
-import {NoteContext} from "../../context/NoteContext" 
+import { NoteContext } from "../../context/NoteContext";
 import s from "./noteCreator.module.scss";
 
 import TextField from "@mui/material/TextField";
@@ -7,13 +7,14 @@ import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const NoteCreator: React.FC = () => {
-  const {state, dispatch} = useContext(NoteContext);
-  const inputRef = useRef<any>()
+  const { state, dispatch } = useContext(NoteContext);
+  const inputRef = useRef<any>();
   const [noteContent, setNoteContent] = useState({
     title: "",
     text: "",
   });
   const [isFocused, setIsFocused] = useState(false);
+  // При фокусе на инпут текста раскрываются остальные элементы
 
   const focusHandler = () => {
     setIsFocused(true);
@@ -24,39 +25,42 @@ const NoteCreator: React.FC = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // Логика onChange на инпутах
     setNoteContent((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
     }));
   };
 
-  const reset = ()=>{
-    setNoteContent({title: "", text: ""})
-  }
+  const reset = () => {
+    // После сохранения, необходимо очистить форму
+    setNoteContent({ title: "", text: "" });
+  };
 
   const submitHandler = (event: React.FormEvent) => {
+    // Перехватываем submit формы и сохраняем note в массив контекста
     event.preventDefault();
 
-    if(noteContent.title === "" && noteContent.text === "" ){
+    if (noteContent.title === "" && noteContent.text === "") {
       return;
     }
 
-    const now = new Date()
+    const now = new Date();
 
     const newNote = {
       id: now.getTime().toString(),
       title: noteContent.title,
       text: noteContent.text,
-      dateCreation: now
-    }
+      dateCreation: now,
+    };
 
-    reset()
-    setIsFocused(false)
-    dispatch({type: "CREATE_NOTE", payload: {newNote}})
+    reset();
+    setIsFocused(false);
+    dispatch({ type: "CREATE_NOTE", payload: { newNote } });
   };
 
   return (
-    <ClickAwayListener onClickAway={handleClickAway}>
+    <ClickAwayListener onClickAway={handleClickAway}> 
       <form
         className={s.noteCreator}
         data-is-focused={isFocused}

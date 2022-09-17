@@ -3,8 +3,6 @@ import s from "./workSpace.module.scss";
 
 import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-import NoteCreator from "../NoteCreator";
-import ListNotes from "../ListNotes";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;

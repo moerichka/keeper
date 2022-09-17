@@ -1,11 +1,30 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { NoteContext } from "../../context/NoteContext";
 import { INote } from "../../types/note";
-import Note from "../Note";
 import s from "./listNotes.module.scss";
+
+import Backdrop from "@mui/material/Backdrop";
+
+import Note from "../Note";
+import NoteUpdater from "../NoteUpdater";
 
 const ListNotes: React.FC = () => {
   const { state, dispatch } = useContext(NoteContext); // Получаем закладки и редюсер для их изменения из контекста
+  const [open, setOpen] = useState(false);
+  const [chosenNote, setChosenNote] = useState({
+    id: "",
+    title: "",
+    text: "",
+    dateCreation: new Date(),
+  });
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = (note: INote) => {
+    setOpen(!open);
+    setChosenNote(note);
+  };
 
   const notes = useMemo(
     () =>
@@ -50,9 +69,21 @@ const ListNotes: React.FC = () => {
             note={note}
             onCompleteClick={onCompleteClick}
             options={options}
+            handleToggle={handleToggle}
           />
         </React.Fragment>
       ))}
+      <div>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={open}
+        >
+          <div className={s.noteUpdater}>
+            <NoteUpdater note={chosenNote} onClickAway={handleClose} />
+          </div>
+          <div className={s.background} onClick={handleClose} />
+        </Backdrop>
+      </div>
     </div>
   );
 };

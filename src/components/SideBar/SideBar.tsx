@@ -64,7 +64,7 @@ interface INavElement {
   icon: any;
 }
 
-const navElements : INavElement[] = [
+const navElements : INavElement[] = [ // Массив табов в sideBar
   { title: "Заметки", icon: <EmojiObjectsIcon /> },
   { title: "Корзина", icon: <DeleteIcon /> },
 ];

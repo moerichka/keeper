@@ -51,12 +51,12 @@ const Search: React.FC = () => {
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
+    // При изменении поля поиска, мы обращаемся к контексту и фильтруем его значения по совпадению первых символов
     if (isInitial) {
       setIsInitial(false);
       return;
     }
     dispatch({ type: "FILTER_NOTES", payload: { searchText } });
-    console.log(state);
   }, [searchText]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

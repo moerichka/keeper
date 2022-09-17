@@ -13,6 +13,7 @@ interface IProps {
   onCompleteClick: (note: INote) => void;
   options: IMenuOption[];
   variant?: string;
+  handleToggle?: (note: INote) => void;
 }
 
 const Note: React.FC<IProps> = ({
@@ -20,9 +21,15 @@ const Note: React.FC<IProps> = ({
   onCompleteClick,
   options,
   variant = "",
+  handleToggle,
 }) => {
   const completeClickHandler = () => {
+    // Вызываем callBack функцию при клике на иконку Complete
     onCompleteClick(note);
+  };
+  const cardClickHandler = () => {
+    // Вызываем callBack функцию при клике на текст заметки
+    handleToggle && handleToggle(note);
   };
 
   return (
@@ -31,8 +38,12 @@ const Note: React.FC<IProps> = ({
       data-is-completed={note.isCompleted}
       data-type={variant}
     >
-      <h5 className={s.title}>{note.title}</h5>
-      <p className={s.text}>{note.text}</p>
+      <h5 className={s.title} onClick={cardClickHandler}>
+        {note.title}
+      </h5>
+      <p className={s.text} onClick={cardClickHandler}>
+        {note.text}
+      </p>
       <p className={s.date}>
         {new Date(note.dateCreation).toLocaleDateString()}
       </p>

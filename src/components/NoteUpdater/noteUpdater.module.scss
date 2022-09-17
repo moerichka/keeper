@@ -1,0 +1,24 @@
+@import "../../index.scss";
+
+.noteCreator {
+  width: 100%;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: $white;
+  min-width: 300px;
+  overflow-y: hidden;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+    0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  transition: $transition03;
+
+  .button {
+    width: 160px;
+    align-self: flex-end;
+  }
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
