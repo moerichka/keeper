@@ -46,7 +46,7 @@ const NoteReducer = (state: INote[], action: IAction): INote[] => {
           return true;
         }
         const dateExpiration = note.dateExpiration ? new Date(note.dateExpiration).getTime() : 0
-        return Number(dateExpiration) < Number(now)
+        return Number(dateExpiration) > Number(now)
       })
 
       localStorage.setItem(
