@@ -29,7 +29,12 @@ const App: React.FC = () => {
     <NoteContextProvider>
       <Box sx={{ display: "flex" }}>
         <Header onBurgerClick={onBurgerClick} />
-        <SideBar open={open} currentTab={currentTab} onTabClick={onTabClick} />
+        <SideBar
+          open={open}
+          currentTab={currentTab}
+          onTabClick={onTabClick}
+          setOpen={onBurgerClick}
+        />
         {currentTab === "Заметки" && (
           <WorkSpace open={open}>
             <NoteCreator />

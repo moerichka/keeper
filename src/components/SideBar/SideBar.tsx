@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./sideBar.module.scss";
 
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import { styled, Theme, CSSObject } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import ToolBar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -57,6 +57,7 @@ interface IProps {
   open: boolean;
   currentTab: ITabName;
   onTabClick: (title: ITabName) => void;
+  setOpen: () => void;
 }
 
 interface INavElement {
@@ -64,49 +65,96 @@ interface INavElement {
   icon: any;
 }
 
-const navElements : INavElement[] = [ // Массив табов в sideBar
+const navElements: INavElement[] = [
+  // Массив табов в sideBar
   { title: "Заметки", icon: <EmojiObjectsIcon /> },
   { title: "Корзина", icon: <DeleteIcon /> },
 ];
 
-const SideBar: React.FC<IProps> = ({ open, onTabClick, currentTab }) => {
+const SideBar: React.FC<IProps> = ({
+  open,
+  onTabClick,
+  currentTab,
+  setOpen,
+}) => {
   return (
-    <Drawer variant="permanent" open={open}>
-      <ToolBar />
-      <List>
-        {navElements.map((navElem, index) => (
-          <ListItem
-            key={navElem.title}
-            disablePadding
-            sx={{ display: "block" }}
-          >
-            <ListItemButton
-              onClick={() => onTabClick(navElem.title)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-              selected={navElem.title === currentTab}
+    <>
+      <Drawer variant="permanent" open={open} className={s.drawerDescTop}>
+        <ToolBar />
+        <List>
+          {navElements.map((navElem) => (
+            <ListItem
+              key={navElem.title}
+              disablePadding
+              sx={{ display: "block" }}
             >
-              <ListItemIcon
+              <ListItemButton
+                onClick={() => onTabClick(navElem.title)}
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
                 }}
+                selected={navElem.title === currentTab}
               >
-                {navElem.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={navElem.title}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Drawer>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  {navElem.icon}
+                </ListItemIcon>
+                <ListItemText
+                  primary={navElem.title}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+      <MuiDrawer open={open} anchor={"left"} className={s.drawerTelephone}>
+        <ToolBar />
+        <List>
+          {navElements.map((navElem) => (
+            <ListItem
+              key={navElem.title}
+              disablePadding
+              sx={{ display: "block" }}
+            >
+              <ListItemButton
+                onClick={() => {
+                  onTabClick(navElem.title);
+                  setOpen();
+                }}
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+                selected={navElem.title === currentTab}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  {navElem.icon}
+                </ListItemIcon>
+                <ListItemText
+                  primary={navElem.title}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </MuiDrawer>
+    </>
   );
 };
 

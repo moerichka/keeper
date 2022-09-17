@@ -1,0 +1,11 @@
+.drawerDescTop{
+    @media (max-width: 870px) {
+        display: none;
+    }
+}
+
+.drawerTelephone{
+    @media (min-width: 871px) {
+        display: none;
+    }
+}
