@@ -81,7 +81,7 @@ const NoteUpdater: React.FC<IProps> = ({ note, onClickAway }) => {
           ref={inputRef}
         />
         <Button variant="contained" type="submit" className={s.button}>
-          Изменить
+          Закрыть
         </Button>
       </div>
     </form>
