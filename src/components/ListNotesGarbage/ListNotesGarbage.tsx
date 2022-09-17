@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useEffect } from "react";
 import { NoteContext } from "../../context/NoteContext";
 import { INote } from "../../types/note";
 import Note from "../Note";
@@ -18,6 +18,10 @@ const ListNotesGarbage: React.FC = () => {
         ), // Сортируем закладки по дате
     [state]
   );
+
+  useEffect(() => { // при открытие корзины удаляем истекшие сроком закладки
+    dispatch({type: "DELETE_NOTES", payload: {}})
+  }, []);
 
   const onCompleteClick = (note: INote) => {
     // Функция при клике на завершение или отмену завершения карточки

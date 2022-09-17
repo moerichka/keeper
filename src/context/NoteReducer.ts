@@ -38,6 +38,23 @@ const NoteReducer = (state: INote[], action: IAction): INote[] => {
       });
 
       return filteredNotes;
+    case "DELETE_NOTES":
+      const now = new Date().getTime();
+
+      const clearNotes = notesData.filter((note: INote) => {
+        if (!note.dateExpiration) {
+          return true;
+        }
+        const dateExpiration = note.dateExpiration ? new Date(note.dateExpiration).getTime() : 0
+        return Number(dateExpiration) < Number(now)
+      })
+
+      localStorage.setItem(
+        LOCAL_STORAGE_ITEM_NAME,
+        JSON.stringify(clearNotes)
+      );
+
+      return clearNotes;
 
     default:
       return state;
