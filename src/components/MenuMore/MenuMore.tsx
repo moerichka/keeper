@@ -1,5 +1,4 @@
 import React from "react";
-import s from "./menuMore.module.scss";
 
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";

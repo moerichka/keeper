@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { NoteContext } from "../../context/NoteContext";
-import s from "./search.module.scss";
 
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
@@ -46,7 +45,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Search: React.FC = () => {
-  const { state, dispatch } = useContext(NoteContext);
+  const { dispatch } = useContext(NoteContext);
   const [isInitial, setIsInitial] = useState(true);
   const [searchText, setSearchText] = useState("");
 

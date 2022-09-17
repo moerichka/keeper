@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createContext, useReducer } from "react";
 import NoteReducer from "./NoteReducer";
 import { INote, IAction } from "../types/note";

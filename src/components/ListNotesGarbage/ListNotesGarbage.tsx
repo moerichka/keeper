@@ -21,7 +21,7 @@ const ListNotesGarbage: React.FC = () => {
 
   useEffect(() => { // при открытие корзины удаляем истекшие сроком закладки
     dispatch({type: "DELETE_NOTES", payload: {}})
-  }, []);
+  });
 
   const onCompleteClick = (note: INote) => {
     // Функция при клике на завершение или отмену завершения карточки

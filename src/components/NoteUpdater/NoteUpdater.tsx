@@ -13,7 +13,7 @@ interface IProps {
 
 const NoteUpdater: React.FC<IProps> = ({ note, onClickAway }) => {
   const [isInitial, setIsInitial] = useState(true);
-  const { state, dispatch } = useContext(NoteContext);
+  const { dispatch } = useContext(NoteContext);
   const inputRef = useRef<any>();
   const [noteContent, setNoteContent] = useState({
     title: "",

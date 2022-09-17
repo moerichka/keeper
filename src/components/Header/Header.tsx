@@ -1,5 +1,4 @@
 import React from "react";
-import s from "./header.module.scss";
 
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";

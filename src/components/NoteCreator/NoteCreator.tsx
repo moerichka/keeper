@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const NoteCreator: React.FC = () => {
-  const { state, dispatch } = useContext(NoteContext);
+  const { dispatch } = useContext(NoteContext);
   const inputRef = useRef<any>();
   const [noteContent, setNoteContent] = useState({
     title: "",
